@@ -31,7 +31,7 @@
 <br>
 
 4.👇 Deploy to Heroku If your have account
-***[![Deploy on heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/mrhanstz/HANS-MD)***
+***[![Deploy on heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/Kidorganic08/ELLY-XMD)***
 
  📞 Support My All Links Here 👋😎
 
