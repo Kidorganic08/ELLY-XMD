@@ -9,7 +9,7 @@ RUN apt-get update && \
   npm i pm2 -g && \
   rm -rf /var/lib/apt/lists/*
   
-RUN  git clone https://github.com/Kidorganic08/ELLY-XMD  /root/b.m.b_BOt
+RUN  git clone https://github.com/Kidorganic08/ELLY-XMD /root/b.m.b_BOt
 WORKDIR /root/b.m.b_Bot/
 
 
