@@ -65,7 +65,7 @@
     "BOT_NAME" : {
        
       "description":"put A name for your bot",
-      "value":"B.M.B MD",
+      "value":"ELLY-XMD",
       "required":false
 
     } ,
