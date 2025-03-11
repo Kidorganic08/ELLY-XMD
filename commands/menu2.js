@@ -34,7 +34,7 @@ const temps = moment().format('HH:mm:ss');
 const date = moment().format('DD/MM/YYYY');
 
   let infoMsg =  `
-╭──── 🪅 MR-B.M.B- MD 🪅 ─────✣
+╭──── 🌏 MR-𝙴𝙻𝙻𝚈-𝚇𝙼𝙳 🌏 ─────✣
 │  ╭─────────────✣
 │  │▸ *my owner* : ${s.OWNER_NAME}
    │▸ *commander* : ${nomAuteurMessage} 
@@ -47,11 +47,11 @@ const date = moment().format('DD/MM/YYYY');
     ▸ *running on* : ${os.platform()}
     ▸ *theme* : *B.M.B*
 
-> MR-B.M.B- MD 🎉 2025\n${readmore}`;
+> MR-𝙴𝙻𝙻𝚈-𝚇𝙼𝙳 🎉 2025\n${readmore}`;
     
 let menuMsg = `
 
- * MR-B.M.B- MD 🎉 COMMADS *${readmore}
+ * MR-𝙴𝙻𝙻𝚈-𝚇𝙼𝙳 🎉 COMMADS *${readmore}
 `;
 
     for (const cat in coms) {
@@ -64,7 +64,7 @@ let menuMsg = `
 ╰────────────···▸▸ \n`
     }
 
-    menuMsg += `> powered by MR-B.M.B-TEAM
+    menuMsg += `> powered by 𝙴𝙻𝙻𝚈-𝚇𝙼𝙳-TEAM
 `;
 
    var lien = mybotpic();
