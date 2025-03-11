@@ -1,27 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const { zokou } = require("../framework/zokou");
-zokou({ nomCom: "test", reaction: "♒", nomFichier: __filename }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "test", reaction: "💯", nomFichier: __filename }, async (dest, zk, commandeOptions) => {
     console.log("Commande saisie !!!s");
-    let z = 'Hello my name is  *MR-B.M.B-MD* \n\n ' + "l'm a whatsapp bot multi-device created ";
-    let d = 'by *MR-B.M.B-MD TEAM*';
+    let z = 'Hello my name is  *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳* \n\n ' + "i'm a whatsapp bot multi-device created ";
+    let d = ' by *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳 *';
     let varmess = z + d;
-    var img = https://files.catbox.moe/tq4i1r.jpg';
+    var img = 'https://files.catbox.moe/6vs8j1.jpg';
     await zk.sendMessage(dest, { image: { url: img }, caption: varmess });
     //console.log("montest")
 });
 console.log("mon test");
 /*module.exports.commande = () => {
   var nomCom = ["test","t"]
-  var reaction="☺️"
+  var reaction="💯"
   return { nomCom, execute,reaction }
 };
 
 async function  execute  (origineMessage,zok) {
   console.log("Commande saisie !!!s")
-   let z ='Salut je m\'appelle *Boniphace* \n\n '+'je suis un bot Whatsapp Multi-appareil '
-      let d =' developpé par *fredi*'
+   let z ='Hi my name is *LUKAS MD* \n\n '+' I'm a Multi-device Whatsapp bot '
+      let d =' developed by *lukas*'
       let varmess=z+d
-      var img='https://files.catbox.moe/ue9i3a.png'
+      var img='https://files.catbox.moe/3kdkf6.jpg'
 await  zok.sendMessage(origineMessage,  { image:{url:img},caption:varmess});
 }  */ 
