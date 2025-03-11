@@ -43,7 +43,7 @@ const date = moment().format('DD/MM/YYYY');
     ▸ *theme* : *MR-B.M.B-MD*
 
 > MR-B.M.B-MD 💥 WA BOT
-> POWERED BY B.M.B TEAM 💎\n${readmore}`;
+> POWERED BY 𝙴𝙻𝙻𝚈-𝚇𝙼𝙳 TEAM 💎\n${readmore}`;
     
 let menuMsg = `
 > Hello ${nomAuteurMessage},,, Type menu2 to access a list of commands. 
