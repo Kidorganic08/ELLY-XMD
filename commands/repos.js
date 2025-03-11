@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const { zokou } = require("../framework/zokou");
 
 zokou({ nomCom: "repo", catégorie:"Général", reaction: "✨", nomFichier: __filename }, async (dest, zk, commandeOptions) => {
-  const githubRepo = 'https://github.com/bmbtz/Mr-B.M.B-MD
+  const githubRepo = 'https://github.com/Kidorganic08/ELLY-XMD
   const img = ''https://files.catbox.moe/0jqumw.mp4';
 
   try {
@@ -22,18 +22,18 @@ zokou({ nomCom: "repo", catégorie:"Général", reaction: "✨", nomFichier: __f
       const lastUpdateDate = new Date(data.updated_at).toLocaleDateString('en-GB');
 
       const gitdata = `*hellow Friend
-this is* *B.M.B-Md.*\n *Follow and support our channel* https://whatsapp.com/channel/0029VawO6hgF6sn7k3SuVU3z
+this is* *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳.*\n *Follow and support our channel* https://whatsapp.com/channel/0029VawO6hgF6sn7k3SuVU3z
 
 🗼 *REPOSITORY:* ${data.html_url}
 💫 *STARS:* ${repoInfo.stars}
 🧧 *FORKS:* ${repoInfo.forks}
 📅 *RELEASE DATE:* ${releaseDate}
 🕐 *UPDATE ON:* ${repoInfo.lastUpdate}
-🙊 *OWNER:* *B.M.B*
-🍃 *THEME:* *MR-B.M.B- MD*
+🙊 *OWNER:* *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳*
+🍃 *THEME:* *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳*
 🍷 *believe in yourself don't depend on anyone*
 __________________________________
-            *Made With mr-b.m.b- Team*`;
+            *Made With 𝙴𝙻𝙻𝚈-𝚇𝙼𝙳- Team*`;
 
       await zk.sendMessage(dest, { image: { url: img }, caption: gitdata });
     } else {
