@@ -1,6 +1,6 @@
    🙏 𝙴𝙻𝙻𝚈-𝚇𝙼𝙳 𝕄𝔻 𝕄𝔸𝔻𝔼 𝔹𝕐 𝙴𝙻𝙻𝚈-𝚇𝙼𝙳 🌟 
 
-[![elly-MD Logo](https://files.catbox.moe/ktp2gk.jpg)](https://whatsapp.com/channel/0029Vb2eknR59PwL1OK4wR24)
+[![elly-MD Logo](https://files.catbox.moe/5e4s1v.jpg)](https://whatsapp.com/channel/0029Vb2eknR59PwL1OK4wR24)
 
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&random=false&width=435&lines=𝑻𝑯𝑰𝑺+𝐈𝐒+𝙴𝙻𝙻𝚈-𝚇𝙼𝙳+𝑴𝑨𝑫𝑬+𝑩𝒀+ELLY+🇹🇿" alt="Typing SVG" /></a>
 
