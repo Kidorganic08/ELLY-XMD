@@ -2,7 +2,7 @@
   "name":"𝙴𝙻𝙻𝚈-𝚇𝙼𝙳",
   "description":"Best whatsapp bot created by king 𝙴𝙻𝙻𝚈-𝚇𝙼𝙳",
   "keywords":["bot","node","baileys","whatsapp"],
-  "logo":"https://files.catbox.moe/5vy4b9.jpg",
+  "logo":"https://files.catbox.moe/5e4s1v.jpg",
   "repository":"https://github.com/Kidorganic08/ELLY-XMD",
   "succes_url":"/",
   "stack":"container",
@@ -72,7 +72,7 @@
      "BOT_MENU_LINKS" : {
     
       "description":"add one or many link for your bot menu  ; eg : url1,url2,url3.....",
-      "value":"https://files.catbox.moe/ktp2gk.jpg",
+      "value":"https://files.catbox.moe/5e4s1v.jpg",
       "required":false
        
      },
