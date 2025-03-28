@@ -52,7 +52,7 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
 
     menuMsg += `┗✨ *ELLY XMD - ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ ᴛʜᴇ ʙᴇsᴛ!* ✨`;
 
-    let imageUrl = "https://files.catbox.moe/inrajt.jpg";
+    let imageUrl = "https://files.catbox.moe/5e4s1v.jpg";
 
     try {
         zk.sendMessage(dest, { 
