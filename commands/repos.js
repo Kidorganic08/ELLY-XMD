@@ -1,45 +1,88 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const { zokou } = require("../framework/zokou");
+const axios = require('axios');
+const moment = require("moment-timezone");
+const { zokou } = require(__dirname + "/../framework/zokou");
 
-zokou({ nomCom: "repo", catégorie:"Général", reaction: "✨", nomFichier: __filename }, async (dest, zk, commandeOptions) => {
-  const githubRepo = 'https://github.com/Kidorganic08/ELLY-XMD
-  const img = ''https://files.catbox.moe/rq99zg.jpg';
+// Function to format large numbers with commas
+const formatNumber = (num) => num.toLocaleString();
 
-  try {
-    const response = await fetch(githubRepo);
-    const data = await response.json();
+// Function to fetch detailed GitHub repository information
+const fetchGitHubRepoDetails = async () => {
+    try {
+        const repo = 'Kidorganic08/ELLY-XMD'; // Updated repo
+        const response = await axios.get(`https://api.github.com/repos/${repo}`);
+        const {
+            name, description, forks_count, stargazers_count,
+            watchers_count, open_issues_count, owner, license
+        } = response.data;
 
-    if (data) {
-      const repoInfo = {
-        stars: data.stargazers_count,
-        forks: data.forks_count,
-        lastUpdate: data.updated_at,
-        owner: data.owner.login,
-      };
-
-      const releaseDate = new Date(data.created_at).toLocaleDateString('en-GB');
-      const lastUpdateDate = new Date(data.updated_at).toLocaleDateString('en-GB');
-
-      const gitdata = `*hellow Friend
-this is* *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳.*\n *Follow and support our channel* https://whatsapp.com/channel/0029VawO6hgF6sn7k3SuVU3z
-
-🗼 *REPOSITORY:* ${data.html_url}
-💫 *STARS:* ${repoInfo.stars}
-🧧 *FORKS:* ${repoInfo.forks}
-📅 *RELEASE DATE:* ${releaseDate}
-🕐 *UPDATE ON:* ${repoInfo.lastUpdate}
-🙊 *OWNER:* *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳*
-🍃 *THEME:* *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳*
-🍷 *believe in yourself don't depend on anyone*
-__________________________________
-            *Made With 𝙴𝙻𝙻𝚈-𝚇𝙼𝙳- Team*`;
-
-      await zk.sendMessage(dest, { image: { url: img }, caption: gitdata });
-    } else {
-      console.log("Could not fetch data");
+        return {
+            name,
+            description: description || "No description provided",
+            forks: forks_count,
+            stars: stargazers_count,
+            watchers: watchers_count,
+            issues: open_issues_count,
+            owner: owner.login,
+            license: license ? license.name : "No license",
+            url: response.data.html_url,
+        };
+    } catch (error) {
+        console.error("Error fetching GitHub repository details:", error);
+        return null;
     }
-  } catch (error) {
-    console.log("Error fetching data:", error);
-  }
+};
+
+// Define the commands that can trigger this functionality
+const commands = ["repo1", "repo", "script", "sc"];
+
+commands.forEach((command) => {
+    zokou({ nomCom: command, categorie: "GitHub" }, async (dest, zk, commandeOptions) => {
+        let { repondre } = commandeOptions;
+
+        const repoDetails = await fetchGitHubRepoDetails();
+
+        if (!repoDetails) {
+            repondre("❌ Failed to fetch GitHub repository information.");
+            return;
+        }
+
+        const {
+            name, description, forks, stars, watchers,
+            issues, owner, license, url
+        } = repoDetails;
+
+        const currentTime = moment().format('DD/MM/YYYY HH:mm:ss');
+        const infoMessage = `
+🌐 *GitHub Repository Info* 🌐
+
+💻 *Name:* ${name}
+📜 *Description:* ${description}
+⭐ *Stars:* ${formatNumber(stars)}
+🍴 *Forks:* ${formatNumber(forks)}
+👀 *Watchers:* ${formatNumber(watchers)}
+❗ *Open Issues:* ${formatNumber(issues)}
+👤 *Owner:* ${owner}
+📄 *License:* ${license}
+
+📅 *Fetched on:* ${currentTime}
+`;
+
+        try {
+            // Send the follow-up image first with a caption
+            await zk.sendMessage(dest, {
+                image: { url: "https://files.catbox.moe/5e4s1v.jpg" }, // Updated image
+                caption: `✨ Repository Highlights ✨\n\n🛠️ Developed by *ELLY-XMD*\n\nRepo URL:\nhttps://github.com/Kidorganic08/ELLY-XMD?tab=readme-ov-file`,
+            });
+
+            // Follow up with the GitHub repository details
+            await zk.sendMessage(dest, {
+                text: infoMessage,
+            });
+
+        } catch (e) {
+            console.log("❌ Error sending GitHub info:", e);
+            repondre("❌ Error sending GitHub info: " + e.message);
+        }
+    });
 });
+              
