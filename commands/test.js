@@ -1,12 +1,12 @@
-"use strict";
+use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const { zokou } = require("../framework/zokou");
 zokou({ nomCom: "test", reaction: "💯", nomFichier: __filename }, async (dest, zk, commandeOptions) => {
     console.log("Commande saisie !!!s");
-    let z = 'Hello my name is  *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳* \n\n ' + "i'm a whatsapp bot multi-device created ";
-    let d = ' by *𝙴𝙻𝙻𝚈-𝚇𝙼𝙳 *';
+    let z = 'Hello my name is  *𝙴ELLY TECH XMD𝙻𝙻𝚈-𝚇𝙼𝙳* \n\n ' + "i'm a whatsapp bot multi-device created ELLY TECH XMD";
+    let d = ' by *𝙴ELLY TECH XMD𝚈-𝙳 *';
     let varmess = z + d;
-    var img = 'https://files.catbox.moe/6vs8j1.jpg';
+    var img = 'https://files.catbox.moe/cmv188.webp';
     await zk.sendMessage(dest, { image: { url: img }, caption: varmess });
     //console.log("montest")
 });
@@ -19,9 +19,9 @@ console.log("mon test");
 
 async function  execute  (origineMessage,zok) {
   console.log("Commande saisie !!!s")
-   let z ='Hi my name is *LUKAS MD* \n\n '+' I'm a Multi-device Whatsapp bot '
-      let d =' developed by *lukas*'
+   let z ='Hi my name is *ELLY TECH XMD* \n\n '+' I'm a Multi-device Whatsapp bot '
+      let d =' developed by *ELLY TECH*'
       let varmess=z+d
-      var img='https://files.catbox.moe/3kdkf6.jpg'
+      var img='https://files.catbox.moe/cmv188.webp'
 await  zok.sendMessage(origineMessage,  { image:{url:img},caption:varmess});
 }  */ 
