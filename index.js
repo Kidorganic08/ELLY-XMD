@@ -262,7 +262,7 @@ const port = process.env.PORT || 9090;
     
   if(senderNumber.includes("255683514508")){
   if(isReact) return
-  m.react("😂")
+  m.react( )
    }
   //==========public react============//
   // Auto React 
