@@ -1,7 +1,5 @@
 const config = require('../config');
 const { cmd, commands } = require('../command');
-const fs = require('fs');
-const path = require('path');
 const os = require('os');
 const { runtime } = require('../lib/functions');
 
@@ -28,42 +26,41 @@ cmd({
   pattern: "menu",
   alias: ["allmenu", "command"],
   use: '.menu',
-  desc: "menu the bot",
+  desc: "Show bot menu",
   category: "menu",
   react: "🪀",
   filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
   try {
-    const randomIndex = Math.floor(Math.random() * 10) + 1;
-    const imagePath = path.join(__dirname, '..', 'plugins', `menu${randomIndex}.jpg`);
-    const imageBuffer = fs.readFileSync(imagePath);
+    // Picha kutoka link
+    const imageUrl = 'https://files.catbox.moe/8otj3h.jpg';
 
-    // Panga commands kwa category
+    // group commands by category
     const grouped = {};
     for (const c of commands) {
       if (!grouped[c.category]) grouped[c.category] = [];
       grouped[c.category].push(c);
     }
 
-    // Tengeneza string ya commands zilizopangwa
+    // tengeneza string ya commands
     let commandsList = '';
     for (const cat in grouped) {
-      commandsList += `\n╭━━〔 *${cat.toUpperCase()}* 〕━━⊷\n`;
+      commandsList += `\n╭━〔 *${cat.toUpperCase()}* 〕━⊷\n`;
       for (const c of grouped[cat]) {
         commandsList += `┃❒ ${config.PREFIX}${c.pattern}\n`;
       }
-      commandsList += `╰━━━━━━━━━━━━━━━⊷\n`;
+      commandsList += `╰━━━━━━━━━━━━━⊷\n`;
     }
 
     let dec = `
-╭━〔*🤖 ELLY TECH 🤖*〕━━┈⊷
+╭━〔 🤖 ELLY TECH 🤖 〕━━┈⊷
 ┃❒╭────────────
-┃❒│ 👑 *ʀᴜɴᴛɪᴍᴇ:* ${runtime(process.uptime())}
-┃❒│ 🕹️ *ᴍᴏᴅᴇ:* *${config.MODE}*
-┃❒│ 🎯 *ᴘʀᴇғɪx:* *${config.PREFIX}*
-┃❒│ 💡 *ʀᴀᴍ ᴜsᴇ:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB
-┃❒│ 👑 *ᴅᴇᴠ:* *𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙃*
-┃❒│ 🚀 *ᴠᴇʀsɪᴏɴ:* *1.0.0*
+┃❒│ 👑 *Runtime:* ${runtime(process.uptime())}
+┃❒│ 🕹️ *Mode:* *${config.MODE}*
+┃❒│ 🎯 *Prefix:* *${config.PREFIX}*
+┃❒│ 💡 *RAM Use:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB
+┃❒│ 👑 *Dev:* *𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙷*
+┃❒│ 🚀 *Version:* *1.0.0*
 ┃❒╰────────────────
 ╰━━━━━━━━━━━━━━━━━━┈⊷
 ${commandsList}
@@ -73,7 +70,7 @@ ${commandsList}
     await conn.sendMessage(
       from,
       {
-        image: imageBuffer,
+        image: { url: imageUrl },  // << Hapa tunatumia link ya picha
         caption: dec,
         contextInfo: {
           mentionedJid: [m.sender],
@@ -90,7 +87,7 @@ ${commandsList}
     );
 
   } catch (e) {
-    console.log(e);
+    console.log("Menu Error:", e);
     reply(`${e}`);
   }
 });
