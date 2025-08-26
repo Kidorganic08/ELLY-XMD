@@ -2,6 +2,7 @@ const config = require('../config')
 const { cmd, commands } = require('../command');
 const { runtime } = require('../lib/functions');
 const axios = require('axios');
+const os = require('os');
 
 cmd({
   pattern: "menu",
@@ -13,28 +14,29 @@ cmd({
   filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
   try {
-    // Pakua picha kutoka URL
+    // Fetch image from URL
     const imageUrl = "https://files.catbox.moe/8otj3h.jpg";
     const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
     const imageBuffer = Buffer.from(response.data, 'binary');
 
-    // Header ya fixed na idadi ya commands
+    // Menu header
     const dec = `
 ╭━〔*🪀 ELLY TECH 🪀*〕━━┈⊷
 ┃❒╭────────────
-┃❒│ 👑 *ʀᴜɴᴛɪᴍᴇ:* ${runtime(process.uptime())}
-┃❒│ 🕹️ *ᴍᴏᴅᴇ:* *${config.MODE}*
-┃❒│ 🎯 *ᴘʀᴇғɪx:* *${config.PREFIX}*
-┃❒│ 💡 *ʀᴀᴍ ᴜsᴇ:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} GB / ${Math.round(require('os').totalmem / 1024 / 1024)} GB
-┃❒│ 👑 *ᴅᴇᴠ:* *𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙷*
-┃❒│ 🚀 *ᴠᴇʀsɪᴏɴ:* *1.0.0*
-┃❒│ 📜 *commands:* ${commands.size}
+┃❒│ 👑 *Runtime:* ${runtime(process.uptime())}
+┃❒│ 🕹️ *Mode:* *${config.MODE}*
+┃❒│ 🎯 *Prefix:* *${config.PREFIX}*
+┃❒│ 💡 *Ram Use:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} GB / ${Math.round(os.totalmem() / 1024 / 1024)} GB
+┃❒│ 👑 *Developer:* *𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙷*
+┃❒│ 🚀 *Version:* *1.0.0*
+┃❒│ 📜 *Commands:* ${commands.size}
 ┃❒╰────────────────
 ╰━━━━━━━━━━━━━━━━━━┈⊷`;
 
     // Group commands by category
     const categories = {};
     for (let command of commands.values()) {
+      if (!command.category) command.category = "other";
       if (!categories[command.category]) categories[command.category] = [];
       categories[command.category].push(command);
     }
@@ -54,14 +56,14 @@ cmd({
 
     // Create the list message
     const listMessage = {
-      text: dec + `\n\nTotal commands: ${commands.size}`,
-      footer: 'Powered by 𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙷 🔥',
-      title: 'MAIN MENU',
+      text: `🪀 *ELLY TECH MAIN MENU* 🪀\n\nTotal commands: ${commands.size}`,
+      footer: 'Powered by 𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙃 🔥',
+      title: '📜 COMMAND LIST',
       buttonText: 'Open Menu',
       sections
     };
 
-    // Tuma message na contextInfo kama ulivyotaka
+    // Send image with caption
     await conn.sendMessage(
       from,
       {
@@ -73,12 +75,18 @@ cmd({
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
             newsletterJid: '120363382023564830@newsletter',
-            newsletterName: '𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙷',
+            newsletterName: '𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙃',
             serverMessageId: 143
           }
-        },
-        ...listMessage
+        }
       },
+      { quoted: m }
+    );
+
+    // Send list menu
+    await conn.sendMessage(
+      from,
+      listMessage,
       { quoted: m }
     );
 
@@ -86,4 +94,3 @@ cmd({
     console.log(e);
     reply(`${e}`);
   }
-});
