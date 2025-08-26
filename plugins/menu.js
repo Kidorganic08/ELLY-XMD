@@ -1,69 +1,75 @@
-const config = require('../config')
+const config = require('../config');
 const { cmd, commands } = require('../command');
-const { runtime } = require('../lib/functions');
-const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 const os = require('os');
+const { runtime } = require('../lib/functions');
+
+const quotedContact = {
+  key: {
+    fromMe: false,
+    participant: `0@s.whatsapp.net`,
+    remoteJid: "status@broadcast"
+  },
+  message: {
+    contactMessage: {
+      displayName: "ELLY XMD VERIFIED ✅",
+      vcard: `BEGIN:VCARD
+VERSION:3.0
+FN:B.M.B VERIFIED ✅
+ORG:B.M.B TECH BOT;
+TEL;type=CELL;type=VOICE;waid=255767862457:+255767862457
+END:VCARD`
+    }
+  }
+};
 
 cmd({
   pattern: "menu",
-  alias: ["allmenu", "bmb"],
+  alias: ["allmenu", "command"],
   use: '.menu',
-  desc: "Show all bot commands",
+  desc: "menu the bot",
   category: "menu",
-  react: "🔰",
+  react: "🪀",
   filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
   try {
-    // Fetch image from URL
-    const imageUrl = "https://files.catbox.moe/8otj3h.jpg";
-    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-    const imageBuffer = Buffer.from(response.data, 'binary');
+    const randomIndex = Math.floor(Math.random() * 10) + 1;
+    const imagePath = path.join(__dirname, '..', 'plugins', `menu${randomIndex}.jpg`);
+    const imageBuffer = fs.readFileSync(imagePath);
 
-    // Menu header
-    const dec = `
-╭━〔*🪀 ELLY TECH 🪀*〕━━┈⊷
+    // Panga commands kwa category
+    const grouped = {};
+    for (const c of commands) {
+      if (!grouped[c.category]) grouped[c.category] = [];
+      grouped[c.category].push(c);
+    }
+
+    // Tengeneza string ya commands zilizopangwa
+    let commandsList = '';
+    for (const cat in grouped) {
+      commandsList += `\n╭━━〔 *${cat.toUpperCase()}* 〕━━⊷\n`;
+      for (const c of grouped[cat]) {
+        commandsList += `┃❒ ${config.PREFIX}${c.pattern}\n`;
+      }
+      commandsList += `╰━━━━━━━━━━━━━━━⊷\n`;
+    }
+
+    let dec = `
+╭━〔*🤖 ELLY TECH 🤖*〕━━┈⊷
 ┃❒╭────────────
-┃❒│ 👑 *Runtime:* ${runtime(process.uptime())}
-┃❒│ 🕹️ *Mode:* *${config.MODE}*
-┃❒│ 🎯 *Prefix:* *${config.PREFIX}*
-┃❒│ 💡 *Ram Use:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} GB / ${Math.round(os.totalmem() / 1024 / 1024)} GB
-┃❒│ 👑 *Developer:* *𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙷*
-┃❒│ 🚀 *Version:* *1.0.0*
-┃❒│ 📜 *Commands:* ${commands.size}
+┃❒│ 👑 *ʀᴜɴᴛɪᴍᴇ:* ${runtime(process.uptime())}
+┃❒│ 🕹️ *ᴍᴏᴅᴇ:* *${config.MODE}*
+┃❒│ 🎯 *ᴘʀᴇғɪx:* *${config.PREFIX}*
+┃❒│ 💡 *ʀᴀᴍ ᴜsᴇ:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB
+┃❒│ 👑 *ᴅᴇᴠ:* *𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙃*
+┃❒│ 🚀 *ᴠᴇʀsɪᴏɴ:* *1.0.0*
 ┃❒╰────────────────
-╰━━━━━━━━━━━━━━━━━━┈⊷`;
+╰━━━━━━━━━━━━━━━━━━┈⊷
+${commandsList}
+> powered by Elly tech 
+`;
 
-    // Group commands by category
-    const categories = {};
-    for (let command of commands.values()) {
-      if (!command.category) command.category = "other";
-      if (!categories[command.category]) categories[command.category] = [];
-      categories[command.category].push(command);
-    }
-
-    // Prepare sections for list message
-    const sections = [];
-    for (let [category, cmds] of Object.entries(categories)) {
-      sections.push({
-        title: `${category.toUpperCase()} - ${cmds.length} commands`,
-        rows: cmds.map(c => ({
-          title: c.use || c.pattern,
-          description: c.desc || 'No description',
-          rowId: c.use || c.pattern
-        }))
-      });
-    }
-
-    // Create the list message
-    const listMessage = {
-      text: `🪀 *ELLY TECH MAIN MENU* 🪀\n\nTotal commands: ${commands.size}`,
-      footer: 'Powered by 𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙃 🔥',
-      title: '📜 COMMAND LIST',
-      buttonText: 'Open Menu',
-      sections
-    };
-
-    // Send image with caption
     await conn.sendMessage(
       from,
       {
@@ -75,22 +81,16 @@ cmd({
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
             newsletterJid: '120363382023564830@newsletter',
-            newsletterName: '𝙱.𝙼.𝙱-𝚃𝙴𝙲𝙃',
+            newsletterName: 'ELLY TECH',
             serverMessageId: 143
           }
         }
       },
-      { quoted: m }
-    );
-
-    // Send list menu
-    await conn.sendMessage(
-      from,
-      listMessage,
-      { quoted: m }
+      { quoted: quotedContact }
     );
 
   } catch (e) {
     console.log(e);
     reply(`${e}`);
   }
+});
