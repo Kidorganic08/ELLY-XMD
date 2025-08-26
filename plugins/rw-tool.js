@@ -6,7 +6,7 @@ cmd({
   alias: ["randomwall", "wallpaper"],
   react: "🌌",
   desc: "Download random wallpapers based on keywords.",
-  category: "wallpapers",
+  category: "MENU",
   use: ".rw <keyword>",
   filename: __filename
 }, async (conn, m, store, { from, args, reply }) => {
@@ -17,7 +17,7 @@ cmd({
     const { data } = await axios.get(apiUrl);
     
     if (data.status && data.imgUrl) {
-      const caption = `🌌 *Random Wallpaper: ${query}*\n\n> *© Powered by Nexus Tech*`;
+      const caption = `🌌 *Random Wallpaper: ${query}*\n\n> *© Powered by elly Tech*`;
       await conn.sendMessage(from, { image: { url: data.imgUrl }, caption }, { quoted: m });
     } else {
       reply(`❌ No wallpaper found for *"${query}"*.`);
